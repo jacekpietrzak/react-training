@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>01 - React wprowadzenia</title>
+  </head>
+  <body>
+    <h2>Gdzie szukac informacji o React?</h2>
+    <ul>
+      <li><a href="https://reactjs.org">reactjs.org</a></li>
+      <ul>
+        <li>
+          tutaj mamy cala dokumentacje i tutoriale ale tez mamy duzo odniesien
+          do komponentow klasowych ktore w pewnym momencie staly sie glownym
+          sposobem na pisanie komponentow reaktowych.
+        </li>
+        <li>
+          W pewnym momencie tworcy react stwierdzili ze mozna pisac komponenty
+          bardziej funkcyjnie ktore zaczely dominowac w srodowiskach JS i
+          wprowadzony zostal nowy koncept ktory sie nazywa
+          <strong>hooks</strong> ktory zamienia komponenty klasowe na
+          hookowe/funkcyjne.
+        </li>
+        <li>
+          jeden i drugi moga funkcjonowac kolo siebie. React gdy przeszedl na
+          hooki oglosil ze dalej wspiera klasowe komponenty ale docelowo chce
+          przejsc na funkcyjne komponenty.
+        </li>
+      </ul>
+      <li><a href="https://beta.reactjs.org">beta.reactjs.org</a></li>
+      <ul>
+        <li>dokumentacja oparta na nowych komponentach hook-owych</li>
+      </ul>
+    </ul>
+
+    <h2>Narzedzia</h2>
+    <ul>
+      <li>
+        <h3>Create React App</h3>
+        <p>
+          Aby stworzyc nowy projekt, aplikacje React mozemy uzyc narzedzia
+          <strong>Create Rect App</strong>. Z tego narzedzia mozemy korzystac po
+          wpisaniu komendy
+          <code>npx create-react-app nazwa_folderu_projektu</code>. Ta komenda
+          utworzy nam aplikacje React w podanym folderze. Po wpisaniu i
+          nacisnieciu enter React utworzy nam folder (w ktorym znajdzie sie cala
+          podstawowa struktura plikow) i zainstaluje potrzebne pakiety jak
+          <code>webpack</code>, <code>babel</code> i <code>ESLint</code>. ESLint
+          jest przydatny poniewaz jest to paczka ktora analizuje nasz kod i
+          pokazuje czy popelnilismy jakies bledy czy nie. Beda one podswietlane
+          na czerwono. Komenda <code>npx</code> pozwala nam odrazu odpalic jakis
+          zasob z repozytorium.
+        </p>
+      </li>
+      <li>
+        <h3>React DevTools</h3>
+        <p>
+          <a
+            href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en"
+            >React DevTools</a
+          >
+          to wtyczka do przegladarki chrome ktora pozwala nam wchodzic w
+          komponenty Reactowe i analizowac ich stan, wlasciwosci itp.
+        </p>
+      </li>
+    </ul>
+
+    <h2>Co dalej?</h2>
+    <ul>
+      <li>
+        Po utworzeniu aplikacji zazwyczaj powinnismy zaczac od wejscia w
+        src/index.js
+      </li>
+      <li>
+        Na starcie aplikacja ma utworzona defaultowa strukture ktora tworzy nam
+        prosta stronke z krecacym sie logo Reacta.
+      </li>
+      <li>
+        Zaczniemy od omowienia jak dziala React i skad biora sie te rzeczy w
+        pliku startowym <code>index.js</code>
+        <ul>
+          <li>
+            Pierwsza linijka ktora widzimy to
+            <code>import React from "react";</code>. Importujemy glowna
+            biblioteke <strong>React</strong> z folderu
+            <code>node_modules</code>. Podobnie jak kolejna sciezka czyli
+            <code>import ReactDOM from "react-dom/client";</code>. ReactDOM to
+            jest cos co pozwala nam tworzyc wirtualny DOM i przepisywac go potem
+            na prawdziwy DOM. Sa one potrzebne do tworzenia aplikacji
+            React-owych.
+          </li>
+          <li>
+            React wprowadzil swoj tak jakby jezyk programowania
+            <strong>jsx - javascript syntax extension </strong>ktory jest jakby
+            nadbudowka <strong>js</strong>. Polaczenie xml z js ktore pozwala
+            tworzyc obiekty js ktore beda przypominac html. Oznacza to ze mozemy
+            sobie w React stworzyc zmienna np
+            <code
+              >const myContainer = &lt;div&gt;Hello World&lt;&sol;div&gt; </code
+            >. To jest poprawny <strong>jsx</strong>. React pozwala nam
+            przypisywac elementy Html do zmiennej. Jest to wirtualna
+            reprezentacja <code>&lt;div&gt;</code> w wirtualnym DOM.
+          </li>
+          <li>
+            Babel to kompilator z JSX do JS. Jest takie narzedzie jak wirtualny
+            <a href="https://babeljs.io/repl"><strong>Babel</strong></a>
+            online w ktorym mozemy zobaczyc jak to wyglada. Po lewej mamy jsx a
+            po prawej Babel konwertuje nam to na zwykly JS. To nie jest HTML to
+            jest javascript. Tylko ze latwiej nam zapisac cos takiego niz
+            <code
+              >const myContainer = React.createElement("div", null, "Hello
+              World");</code
+            >
+          </li>
+          <li>
+            Gdybysmy chcieli stworzyc bardziej zlozona strukture, np na kilku
+            linijkach, z zagniezdzeniami:
+            <code
+              >const myContainer = (&lt;div&gt;&lt;h1&gt;Hello
+              World&lt;&sol;h1&gt;&lt;&sol;div&gt;)
+            </code>
+            to musimy uzyc <code>()</code>. Wynikiem tego w JS bedzie:
+            <code
+              >const myContainer = React.createElement("div", null,
+              React.createElement("h1", null, "Hello World"));</code
+            >. To jest obiekt ktory istnieje w pamieci i moze byc manipulowany w
+            pamieci i dopiero kiedy jest potrzeba wyrenderowania go to wtedy sie
+            renderuje na ekranie.
+          </li>
+          <li>
+            Jesli chodzi o renderowanie to tak na prawde nie musimy sie tym
+            przejmowac bo ta jedna linijka kodu ktora renderuje nam aplikacje w
+            kodzie bedzie uzyta tylko raz i bedzie istniala tylko wewnatrz pliku
+            index.js gdyz React ma to do siebie ze ma taka zasade Roota ktory ma
+            dzieci. Te dzieci sa coraz bardziej i bardziej zagniezdzone ale
+            renderujemy wszystko tylko raz. Metoda
+            <code>.render()</code> wystarczy ze jest wywolana raz i jezeli
+            bedziemy miec w niej jakis komponent to jego dzieci beda zawsze
+            rerenderowane gdy zajdzie taka potrzeba. My nie musimy tego
+            <code>.render()</code> wiecej wolac. Jeden render na aplikacje.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>Renderowanie</h3>
+        <ul>
+          <li>
+            <code>ReactDOM</code>pozwala nam utworzyc cos takiego jak
+            <code>createRoot()</code>w srodku ktorego przekazujemy parametr
+            ktory jest referencja do obiektu Html w ktorym bedzie sie renderowac
+            cala nasza aplikacja.
+            <code>ReactDOM.createRoot(document.getElementById("root"))</code>. W
+            folderze <strong>public</strong> sa wszystkie pliki ktore beda w
+            ostatecznym build-zie.
+          </li>
+          <li>
+            w bazowym HTML template mamy tylko podstawowe tagi html. W body mamy
+            jednego pustego diva o id="root"
+            <code>&lt;div id="root"&gt;&lt;&sol;div&gt;</code> w ktorym bedzie
+            sie generowac cala aplikacja za pomoca React. Zeby to moglo sie stac
+            musimy przekazac referencje
+            <code>ReactDOM.createRoot(document.getElementById("root"))</code> -
+            tworzy glowny root naszej aplikacji. Definiujemy go mowiac ze to
+            jest nasz root i ze tam bedzie zrodlo aplikacji.
+          </li>
+          <li>
+            Jak juz mamy wybrane zrodlo aplikacji chcemy zeby uzyl metody
+            <code>.render()</code>, czyli wyrenderowac cos.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>JSX</h3>
+        <ul>
+          <li>Co jest jeszcze fajnego w JSX? Moze czytac zmienne JS.</li>
+          <li>
+            Aby przekazac czysty kod JS w JSX musimy taki kod jedynie wrzucic w
+            nawiasy klamrowe <code>{}</code>. Na przyklad wczesniej definiujemy
+            zmienna <code>const name ="John Smith"</code> i potem mozemy jej
+            uzyc w kodzie JSX:
+            <code
+              >&lt;div&gt;&lt;h1&gt;Hello
+              {name}&lt;&sol;h1&gt;&lt;&sol;div&gt;</code
+            >
+          </li>
+          <li>
+            JSX w tak prosty sposob pozwala nam uzywac zmiennych wewnatrz czegos
+            co przypomina html. Jest to dynamiczna wartosc ktora mozemy
+            przekazac.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>Komponent</h3>
+        <ul>
+          <li>
+            Czym jest komponent? Jest jednym z podstawowychczynnikow skladowych
+            Reacta. Idea tworzenia komponentow jest podstawowa zasada dzialania
+            calego ekosystemu React.
+          </li>
+          <li>
+            Najbardziej popularnym sposobem i ogolnie przyjetym sposobem
+            tworzenia komponentow reactowych jest tworzenie funkcji.
+            Najpopularniejszym komponentem jest komponent funkcyjny. Jak on
+            wyglada?:
+            <ul>
+              <li>
+                Komponent musi miec nazwe ktra zaczyna sie od wielkiej litery.
+                To jest regula. Nazywamy go App. To bedize nasz glowny
+                komponent. Taka tez jest konwencja aby nazywac App.
+                <code>const App = () => { };</code>
+              </li>
+              <li>Bedzie to funkcja. W naszym przypadku strzalkowa.</li>
+              <li>
+                Jesli nie potrzebujemy zadnej dodatkowej logiki to mozemy
+                zwrocic cos odrazu. <code>const App = () => {return()};</code>.
+                Jesli odrazu cos zwracamy to mozemy uzyc zasady skroconego
+                zapisu i zapisac to tak:
+                <code>const App = () => ();</code>
+              </li>
+              <li>
+                Co zwracamy? Komponent React zawsze musi zwrocic JSX. Na
+                przyklad cos takiego:
+                <code
+                  >const App = () => (&lt;div&gt;&lt;h1&gt;Hello
+                  World&lt;&sol;h1&gt;&lt;&sol;div&gt;)</code
+                >
+              </li>
+              <li>
+                Jak przekazujemy App? App to nie jest zwykla zmienna tylko
+                funkcyjny React-owy kompenent. Komponenty zapisujemy w JSX w ten
+                sposob ze jezeli to jest komponent ktorego chcemy uyzc gdzies i
+                nie bierze dzieci to przypomina tag htmlowy samozamykajacy sie.
+                <code>&lt;App &sol;&gt;</code>. Czyli w ten sposob:
+                <code
+                  >ReactDOM.createRoot(document.getElementById("root")).render(&lt;App
+                  &sol;&gt;)</code
+                >
+              </li>
+              <li>
+                Mamy sytuacje w ktorej div bierze h1 ale jesli chcielibysmy
+                wrzucic cos ponizej np tak:
+                <code
+                  >const App = () => (&lt;div&gt;&lt;h1&gt;Hello
+                  World&lt;&sol;h1&gt;&lt;&sol;div&gt;&lt;section&gt;some
+                  text&lt;&sol;section&gt;)</code
+                >
+
+                to dostaniemy error. Jest zasada jednego nadzednego rodzica
+                jesli chodzi o zawartosc komponentu Reactowego. Mozemy miec
+                dowolna ilosc rzeczy ale one zewnetrznie musza byc owiniete
+                przez jednego rodzica. To moze byc div, article, section, to
+                moze byc dowolny htmlowy tag.
+                <code
+                  >const App = () => (&lt;div&gt;&lt;h1&gt;Hello
+                  World&lt;&sol;h1&gt;&lt;section&gt;some
+                  text&lt;&sol;section&gt;&lt;&sol;div&gt;)</code
+                >
+              </li>
+              <li>
+                Moze byc jednak sytuacja kiedy my nie chcemy tworzyc extra div
+                albo extra section bez sensu. Psuje nam to stylowanie albo nie
+                chcemy dodatkowych zagniezdzen. Mozemy zrezygnowac z niego i
+                uzyc czegos co sie nazywa React Fragment
+                <code>&lt;&gt;something&lt;&sol;&gt;</code>. Taki pusty tag ale
+                koniecznie zamkniety. Dzieki temu w rezultacie nie mamy ekstra
+                tagu.
+              </li>
+              <li>
+                Aby dodac komponent do aplikacji dodajemy go poprzez
+                samodomykajacy sie tag:
+                <code>&lt;Card &sol;&gt;</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h3>Props</h3>
+            <ul>
+              <li>
+                Reactowe komponenty nie bylyby tak fajne gdyby ograniczaly sie
+                do przekazywania statycznych rzeczy.
+              </li>
+              <li>
+                Cala ich moc polega na tym ze kazdy komponent React bierze cos
+                co sie nazywa <strong>props</strong> czyli wlasciwosci. Bierze
+                te wlasciwosci jako argument.
+                <code>const Card = (<strong>props</strong>) => {return()}</code
+                >. Jezeli zdefiniujemy sobie takie props to mamy do nich dostep
+                wewnatrz tego komponentu. Mozemy sobie zobaczyc czym one sa. Np
+                jesli powyzej return (pamietajmy ze wszystko powyzej return to
+                zwykly JS)
+              </li>
+              <li>Jak mozemy je czyms wypelnic?</li>
+              <ul>
+                <li>
+                  nasz komponent ktory jest zdeklarowany a potem uzyty moze
+                  dostac wlasciwosci w miejscu uzycia.
+                </li>
+                <li>
+                  Aby to zrobic najpierw musimy zdefiniowac nazwe propsu np w
+                  miejscu gdzie go uzywamy.
+                  <code>&lt;Card title="Card Title" &sol;&gt;</code>
+                </li>
+                <li>
+                  Teraz jak sprawdzimy co zwraca nasz "props" zobaczymy ze
+                  dostaniemy obiekt z kluczem title i wartoscia Card Title
+                </li>
+                <li>
+                  co mozemy z tym zrobic? Mozemy uzyc go w miejscu definiowania
+                  komponentu i dynamicznie wypelnic wartosc h2. W nawiasach
+                  klamrowych wpiszemy props <code>{props}</code> gdyz to mamy
+                  podane. Poniewaz props to obiekt to wiemy jak sie dostac do
+                  srodka. Mamy zdefiniowany title: <code>props.title</code> co
+                  ostatecznie wyglada tak:
+                  <code
+                    >const Card = (props) =>
+                    {return(&lt;article&gt;&lt;h1&gt;&lt;&sol;h1&gt;{props.title}&lt;&sol;article&gt;)}</code
+                  >. Tak samo mozemy sobie zdefiniowac description.
+                </li>
+              </ul>
+              <li>
+                <h4>Destrukturyzacja</h4>
+                <ul>
+                  <li>
+                    Zeby rzeczy uproscic, poniewaz jest to obiekt, mozemy go
+                    destrukturyzowac. Zdefiniujemy sobie obiekt i z czego
+                    bierzemy, czyli z propsu.
+                    <code>const {} = props</code>
+                    W tym obiekcie wpisujemy rzeczy ktore nas interesuja.
+                    <code>const {title, description} = props</code> To sa rzeczy
+                    ktore chcemy wyciagnac z propsu. Jezeli juz je wyciagniemy
+                    to mozemy ich uzywac jak zwyklych zmiennych. Czyli juz nie
+                    potrzebujemy pisac <code>{props.title}</code> bo mamy juz
+                    podlaczone to pod te zmienne:
+                    <code>const {title, description} = props</code> co w
+                    ostatecznosci bedzie wygladalo tak:
+
+                    <code
+                      >const Card = ({props}) => {return( &lt;article&gt;
+                      &lt;h1&gt; {title} &lt;&sol;h1&gt;
+                      &lt;&sol;article&gt;)}</code
+                    >
+                  </li>
+                  <li>
+                    Mozna tez zapisac to inaczej. Zamiast destrukturyzowac to
+                    poprzez tworzenie osobnej zmiennej mozemy odrazu
+                    destrukturyzowac to w parametrach funkcji komponentu
+                    wypisujemy klucze ktore chcemy miec.
+                    <pre>
+                      <code>const Card = ({title, description}) => {
+                        return(
+                        &lt;article&gt; 
+                          &lt;h1&gt; {title} &lt;&sol;h1&gt;
+                          &lt;p&gt; {description} &lt;&sol;p&gt;
+                        &lt;&sol;article&gt;)}</code
+                      >
+                    </pre>
+                  </li>
+                  <li>
+                    Co jesli mamy zdefiniowane cos co spodziewa sie jakiegos
+                    propsa i go nie dostanie przy wywolaniu?
+                    <pre>
+                      <code>const Card = ({title, description, <strong>buttonText</strong>}) => {
+                        return(
+                        &lt;article&gt; 
+                          &lt;h1&gt;{title}&lt;&sol;h1&gt;
+                          &lt;p&gt;{description}&lt;&sol;p&gt;
+                          &lt;button&gt;{buttonText}&lt;&sol;button&gt;
+                        &lt;&sol;article&gt;)}</code
+                      >
+                    </pre>
+                    <pre>
+                      <code>
+                        &lt;Card
+                        title="Hello Card Title"
+                        description="Description of the hello card"
+                        &sol;&gt;</code
+                      >
+                    </pre>
+                    Nic sie nie stanie po prostu dostaniemy pusty button ale w
+                    sytuacji gdy chcemy sie zabezpieczyc przed pustym tekstem
+                    buttonu mozemy zwyczajnie przekazac mu domyslna wartosc.
+
+                    <pre>
+                      <code>const Card = ({title, description, <strong>buttonText="Buy"</strong>}) => {
+                        return(
+                        &lt;article&gt; 
+                          &lt;h1&gt;{title}&lt;&sol;h1&gt;
+                          &lt;p&gt;{description}&lt;&sol;p&gt;
+                          &lt;button&gt;{buttonText}&lt;&sol;button&gt;
+                        &lt;&sol;article&gt;)}</code
+                      >
+                    </pre>
+                    <pre>
+                      <code>&lt;Card
+                        title="Hello Card Title"
+                        description="Description of the hello card"
+                        &sol;&gt;</code
+                      >
+                    </pre>
+                  </li>
+                  <li>
+                    Co jest fajne to jesli skopiujemy sobie taki komponent i
+                    uzyjemy go w innym miejscu z innnymi propsami to dynamicznie
+                    sie one zmienia.
+                    <pre>
+                      <code>&lt;Card
+                        title="Hello Card Title"
+                        description="Description of the hello card"
+                        &sol;&gt;</code
+                      >
+                    </pre>
+                    <pre>
+                      <code>&lt;Card
+                        title="Another Card Title"
+                        description="Description of the another card"
+                        &sol;&gt;</code
+                      >
+                    </pre>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <h4>Typowanie propsow</h4>
+                <ul>
+                  <li>
+                    Propsy mozemy pobierac w dowolnej formie. Przekazac mozemy
+                    wszytkie rodzaje zmiennych JS. Ta dowolnosc moze sprawic
+                    problemy. Jak sie upewnic ze komponent bierze propsy w typie
+                    jak chcemy?
+                  </li>
+                  <li>
+                    W samym reakcie wbudowanego typowania nie ma ale jest
+                    dodatek do Reacta ktory pozwala nam z typowania propsow.
+                    <strong>Prop types</strong>
+                    - musimy sobie doinstalowac ten dodatek za pomoca terminala
+                    i komendy: <code>npm install --save-dev prop-types</code>.
+                    <code>--save</code> - oznacza ze jest to zwykle dependencies
+                    <code>--save-dev</code> - oznacza ze to jest development
+                    dependencies i jest nam potrzebne tylko do developmentu.
+                    Jesli zainstalujemy jako dev dependencies to beda one
+                    widoczne w package.json jako dev dependencies.
+                    <ul>
+                      <li>Dependencies - potrzebne do dzialania aplikacji.</li>
+                      <li>
+                        Dev dependencies - potrzebne do tworzenia aplikacji.
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Jesli chcemy skorzystac z prop-types, to po instalacji
+                    musimy zaimportowac modul do komponentu w ktorym chcemy go
+                    uzyc. <code>import PropTypes from "prop-types"</code>. Nie
+                    ma tutaj sciezki dostepu co znaczy ze importujemy
+                    bezposrednio z node_modules.
+                  </li>
+                  <li>
+                    Gdy mamy zdefiniowany komponent np. Card to ponizej mozemy
+                    sie do niego odwolac ponize i zrobic
+                    <pre><code>Card.propTypes = {
+                      title: PropTypes.string.isRequired,
+                      description: PropTypes.string,
+                      buttonText: PropTypes.string
+                    }</code>
+                    </pre>
+                    zadeklarowac ze bedzie to obiekt i w tym obiekcie definiowac
+                    typy dla kazdego z propsow. Klucz to bedzie prop a wartosc
+                    to bedzie typ dla tego propsu. Jesli chcemy powiedziec ze
+                    ten prop jest wymagany to mozemy dodac
+                    <code>.isRequired</code>. Wtedy wiem ze ten konkretny prop
+                    jest potrzebny aby ten komponent zadzialal.
+                  </li>
+                  <li>
+                    Jesli chcemy przekazac liczbe w React musimy zrobic to
+                    poprzez klamry <code>{liczba}</code>
+                  </li>
+                  <li>
+                    jesli wrzucimy jakas wartosc ktora jest niezgodna ze
+                    zdefiniowana czyli np w number wrzucimy stringa to aplikacja
+                    sie wyrenderuje ale w konsoli wywali nam blad.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <h4>Warunkowe renderowanie</h4>
+                <ul>
+                  <li>
+                    Co jesli nie mamy podanego propsu i zamiast pokazywac jakas
+                    wartosc default po prostu nie chcemy pokazywac pozycji?
+                    React pozwala nam na wprowadzenie warunkowosci w sposob
+                    nastepujacy.
+                  </li>
+                  <li>
+                    Jezeli w React w dowolnym momencie otworzymy klamre to w
+                    srodku mamy javascript. Mozemy tam uzyc zmiennej albo
+                    utworzyc jakas operacje. W tym momencie mozemy zrobic
+                    operacje ktory sprawdzi warunek i ewentualnie wyrenderowac
+                    co chcemy.
+                  </li>
+                  <li>
+                    Jak sprawdzic warunek? Powiedzmy chcemy sprawdzic
+                    <strong>price</strong>. Jesli wylogujemy sobie nasze propsy
+                    to widzimy ze <code>price: undefined</code>. Undefined to
+                    zawsze jest wartosc <strong>false</strong>. Czyli jezeli
+                    zrobimy zapis taki: <code>{price &&}</code>. Jezeli jest
+                    zapis polegajacy na podwojnym &&, on sprawdza czy to co jest
+                    przed nim jest prawdziwe. Jezeli jest to robi to co jest
+                    dalej. W naszym przypadku moze cos zwrocic.
+                    <code>{price && &lt;p&gt;Price: ${price}&lt;/p&gt;}</code>
+                    w naszym przypadku markup. Jesli mamy jedna linijke kodu to
+                    nie potrzebujemy nawiadow ale jesli jest ich wiecej to
+                    nawias jest potrzebny. Sprawdzamy czy
+                    <code>price</code> jest prawdziwe, jezeli jest to robimy to
+                    co po prawej stronie &&. Po lewej stronie mozemy sprawdzic
+                    co chcemy np. czy x = 3
+                    <code>{x ===3 && (cos zwracamy jesli prawda)}</code> Jesli
+                    nieprawda to nie renderujemy. W naszym przypadku poprostu
+                    sprawdzamy czy ktos przekazal propsa i jezeli jest to
+                    renderujemy.
+                  </li>
+                  <li>
+                    Moze byc sytuacja ze chcielibysmy uzyc Ternary (conditional)
+                    operator.
+                    <code>variable = condition ? exprIfTrue : exprIfFalse</code
+                    >.
+                    <ul>
+                      <li>
+                        condition = wyrazenie ktorego wartosc przyjmowana jako
+                        warunek
+                      </li>
+                      <li>
+                        exprIfTrue = wyrazenie ktore jest wykonane jezeli
+                        <strong>condition</strong> zwroci wartosc
+                        <code>true</code>
+                      </li>
+                      <li>
+                        exprIfFalse = wyrazenie ktore jest wykonane jezeli
+                        <strong>condition</strong> zwroci wartosc
+                        <code>flase</code>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    W naszym przykladzie z <code>price</code> mozemy sprawdzic
+                    czy <code> price > 0 </code> to wtedy wypisujemy price i
+                    podajemy cene. W przeciwnym razie wypiszemy It's free.
+                    <code
+                      >{price > 0 ? &lt;p&gt;Price: ${price}&lt;/p&gt; :
+                      &lt;p&gt;It's free&lt;/p&gt;}</code
+                    >
+                  </li>
+                  <li>
+                    Mozemy tez uzyc warunku w nawiasie klamrowym uzywajac JS
+                    <code
+                      >&lt;p&gt; Don't miss out - {price >0 ? `It's only
+                      ${price}` : `It's free`}&lt;/p&gt;</code
+                    >
+                    w takim przypadku mozemy uzyc literalu w tagu
+                    <code>``</code> do wyswietlenia tekstu i aby uzyc zmiennej
+                    musimy uzyc <code>${zmienna}</code> gdyz jestesmy w JS.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <h4>Zbiory</h4>
+                <p>Renderowanie listy na podstawie tablicy.</p>
+                <ul>
+                  <li>
+                    Utworzymy sobie nowy komponent funkcyjny. W tym przykladzie
+                    BooksList.js ktory bedzie zwracal liste i bedzie bral w
+                    propsach tablice books
+                    <code>const BooksList = ({books}) => {return()}</code>
+                  </li>
+                  <li>
+                    Na poczatek chcemy zeby sprawdzil czy ta lista stnieje i
+                    jesli istnieje to zeby nam wyrenderowal liste tych ksiazek
+                  </li>
+                  <li>
+                    uzyjemy React fragment <code>&lt;&gt;&lt;/&gt;</code>. Nie
+                    chcemy dodawac nowego tagu. W srodku sprawdzamy czy nasza
+                    lista istnieje. Jesli tak to chcemy wyrenderowac liste.
+                    <pre><code>const BooksList = ({books}) => {
+                      return(
+                        &lt;&gt;
+                        {books && (
+                          &lt;ul&gt;
+                          
+                          &lt;/ul&gt;
+                        )}
+                        &lt;/&gt;
+                      )}</code>
+                    </pre>
+                  </li>
+                  <li>
+                    w tej liscie ma znajdowac sie lista wszystkich elementow
+                    ktore sa zawarte w tablicy books ktora dostaniemy w
+                    propsach. Zrobmy sobie jakies renderowanie listy np. poprzez
+                    JS map.
+                  </li>
+                  <li>
+                    Sprawdzilismy juz sobie ze lista istnieje bo jestesmy w
+                    srodku po prawej stronie od <code>&&</code>
+                  </li>
+                  <li>
+                    w mapie przekazujemy funkcje callback ktora sie odpala przy
+                    kazdej iteracji ktora ma dostepny pojedynczy element
+                    iterowanej listy. W naszym przypadku book (nazwa dowolna).
+                  </li>
+                  <li>
+                    Funkcja bedzie renderowac element listy w ktorym bedzie
+                    tytul ksiazki.
+                    <pre><code>const BooksList = ({books}) => {
+                      return(
+                        &lt;&gt;
+                        {books && (
+                          &lt;ul&gt;
+                            {books.map((book) => {
+                              return &lt;li&gt;{book.name}&lt;/li&gt;;
+                            })}
+                          &lt;/ul&gt;
+                        )}
+                        &lt;/&gt;
+                      )}</code>
+                    </pre>
+                  </li>
+                  <li>
+                    Nastepnie wyeksportujemy sobie ten komponent
+                    <code>export default BooksList</code> i zaimportujemy go
+                    klasycznie do naszej glownej aplikacji
+                    <code>import BooksList from "./components/BooksList"</code>
+                  </li>
+                  <li>
+                    Zdefiniujemy sobie nasze ksiazki a na samym dole przekazemy
+                    nasz komponent BooksList i jako parametr przekazemy nasze
+                    ksiazki.
+                    <code>&lt;BooksList books={favouriteBooks} /&gt;</code>
+                  </li>
+                  <li>
+                    Ale mamy blad. React we wszystkich elementach gdzie
+                    wystepuje iteracja jak listy, mapy itp. potrzebuje dodatkowy
+                    prop na kazdym dziecku tej listy. W tym przypadku kazdym
+                    dzieckiem jest <code>&lt;li&gt;&lt;/li&gt;</code>. Ono
+                    potrzebuje dodatkowy prop jakim jest <code>key</code>. Ten
+                    key to musi byc jakis unikalny i niezmienny identyfikator.
+                    To nie moze byc indeks tej tablicy gdyz nie bylby
+                    niezmienny. React uzywa tego aby wiedziec co sie zmienilo i
+                    co on musi zmienic w DOM kiedy go updateuje. Nalezy przyjac
+                    i zawsze stosowac ze w momencie gdy mamy jakas liste to
+                    musimy przekaza klucz <code>key</code> do elementu ktory
+                    jest dzieckiem takiej iteracji.
+                  </li>
+                  <li>
+                    W zwiazku z tym tutaj przekazujemy cos co mozemy przekazac.
+                    W naszym przypadku nasz element oprocz tytulu ma id. To id
+                    jest stale i nie bedzie sie zmieniac. Mozemy przekazac
+                    <code>key={book.id}</code>. W tej chwili jesli odswiezymy
+                    nie powinno byc bledu. Ten klucz jest uzywany tylko
+                    wewnetrznie przez React aby wiedzial co ma uaktualnic.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>Moduly</h3>
+        <ul>
+          <li>
+            Jesli tworzymy jakis komponent i chcemy z niego stworzyc modul to
+            tworzymy dla niego nowy plik js. Tak naprawde to tworzymy
+            standardowy modul JS. Aby go uzyc musimy go wyeksportowac i potem
+            zaimportowac do index.js. Jesli jest to jedyny export to robimy na
+            koncu <code>export default App</code> App jest nazwa komponentu
+            funkcyjnego ktora exportujemy.
+          </li>
+          <li>
+            Fajnie utworzyc osobny folder "components" w ktorym bedziemy trzymac
+            wszystkie komponenty.
+          </li>
+          <li>
+            natomiast glowny komponent App.js bedziemy trzymac w glownym
+            folderze z index.js
+          </li>
+          <li>
+            Dzieki stworzeniu osobnych modulow dla kazdego komponentu mamy
+            sensownie stworzona architekture ktora pozwala nam oddzielac pliki
+            od siebie ze wzgledu na funkcjonalnosc i jakas biznesowa logike.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>Komponenty z children</h3>
+        <ul>
+          <li>
+            Utworzymy np komponent o nazwie Warning ktory bedzie nam wyswietlal
+            powiadomienie przestrzegajace przed czyms. Nie wiemy do konca jaki
+            bedzie mialo tekst ani jaka bedzie mialo strukture. Moze byc w nim
+            jakies zdjecie, markup, guyziki. Wiec musimy przygotowac sie do tego
+            ze bedzie mialo dowolna forme.
+          </li>
+          <li>
+            Do czegos takiego istnieje specjalny <strong>prop</strong> ktory
+            nazywa sie
+            <strong>children</strong>
+          </li>
+          <li>
+            Children to szczegolny rodzaj propsa ktory children jest zawsze
+            dostepny i ktory mozemy sobie odrazu wypisac. Nie bedziemy uzywac
+            <code>props.children</code> tylko odrazu uzyjemy destrukturyzacji i
+            wpiszemy <code>{children}</code> i to nam wystarczy zeby go uzyc.
+
+            <pre>
+              <code>const Warning = ({children}) => {
+                return(
+                &lt;section&gt; 
+                  &lt;h2&gt;Warning!!!&lt;&sol;h2&gt;
+                  &lt;p&gt;{children}&lt;&sol;p&gt;
+                &lt;&sol;section&gt;)}</code
+              >
+            </pre>
+          </li>
+          <li>
+            Poniewaz ten modul ma dzieci to aby go uzyc w glownym pliku JS
+            aplikacji uzywamy nie tagu samodomykajacego sie tylko tagow
+            podwojnych (otwierajacego i zamykajacego)
+            <code>&lt;Warning&gt;&lt;&sol;Warning&gt;</code>
+          </li>
+          <li>
+            Do srodka mozemy przekazac dowolny markup. Po to uzywamy
+            <code>{children}</code>. Mozemy <code>{children}</code> wrzucic np w
+            <code>&lt;div&gt;&lt;&sol;div&gt;</code> jesli chcielibysmy go jakos
+            wystylizowac.
+          </li>
+          <li>
+            Mozemy w takim komponencie oczywiscie uzywac innych propsow
+            <pre>
+              <code>const Warning = ({children, title}) => {
+                return(
+                &lt;section&gt; 
+                  &lt;h2&gt;Warning!!! {title}&lt;&sol;h2&gt;
+                  &lt;p&gt;{children}&lt;&sol;p&gt;
+                &lt;&sol;section&gt;)}</code
+              >
+            </pre>
+            i uzyc tego propsa podczas wyswietlania jak w normalnym module
+            React.
+            <pre>
+              <code>&lt;Warning title="Super warning"&gt; 
+                  &lt;h3&gt;This is an important warning&lt;&sol;h3&gt;
+                  &lt;p&gt;{children}&lt;&sol;p&gt;
+                &lt;&sol;Warning&gt;)}</code
+              >
+            </pre>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+.Header {
+  background-color: #282c34;
+  /* min-height: 100vh; */
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  transition: box-shadow ease 250ms, scale ease 250ms;
+}
+
+.Card:hover {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.35);
+  /* scale: 1.002; */
+}
+
+.Button {
+  align-self: flex-start;
+  padding: 10px 15px;
+  cursor: pointer;
+  border: solid 0px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  box-shadow: 0px 2px #282c345b;
+  background-color: rgb(68, 178, 0);
+  color: #fff;
+  /* background-color: #ffffff; */
+  transition: background-color ease 250ms;
+}
+
+.Button:hover {
+  background-color: rgb(68, 178, 0, 0.8);
+  color: #fff;
+}
+.Button:active {
+  background-color: rgba(68, 178, 0, 0.7);
+  box-shadow: 0px 0px #282c345b;
+  transform: translateY(2px);
+}
+
+.Warning {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: rgb(235, 174, 174);
+}
+
+.BooksList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  /* gap: 15px;
+  padding: 10px; */
+  margin: 10px;
+  border-radius: 5px;
+  background-color: rgb(40, 44, 52);
+  color: #fff;
+  transition: box-shadow ease 250ms;
+}
+
+.BooksList:hover {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+}
+
+.BooksList__item {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color ease 250ms, box-shadow ease 250ms;
+}
+
+.BooksList__item:hover {
+  background-color: rgb(85, 93, 110);
+  scale: 1.02;
+  /* box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.35); */
+}

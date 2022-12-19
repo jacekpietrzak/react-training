@@ -1,0 +1,14 @@
+.Card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  transition: box-shadow ease 250ms, scale ease 250ms;
+}
+
+.Card:hover {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.35);
+  /* scale: 1.002; */
+}

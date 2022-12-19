@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>02 - React stylizacja</title>
+  </head>
+  <body>
+    <h2>Stylizacja</h2>
+    <ul>
+      <li>
+        <h3>How to style React components?</h3>
+        <ul>
+          <li>
+            JSX code looks very similar to standard HTML. We coud think that we
+            could use standard inline styling like this:
+            <code>&lt;h1 style="color:red"&gt;Hello&lt;/h1&gt;</code>.
+            Unfortunately if we do that we will receive few warnings in the
+            development tools which means that this is not the right way to do
+            that.
+          </li>
+          <li>
+            JSX is not an HTML. There are similarities in both but it wont work
+            like that. Instead we can do that:
+            <code>&lt;h1 style={{color:"red"}}&gt;Hello&lt;/h1&gt;</code>.
+            Because we are writing it in JSX the value for prop which here is
+            "style" needs to be an object. In JSX, if we want to provide
+            something else than a string (number, boolean, variable) we need to
+            give it as an object. Value for css is an JS object
+            <code>{key: "string value"}</code> . That is why we have object in
+            object.
+          </li>
+          <li>
+            If we would like to give a second value we need to use a comma, not
+            a semicolon like this:
+            <code
+              >&lt;h1 style={{color:"red", fontWeight:200
+              }}&gt;Hello&lt;/h1&gt;</code
+            >. Because we are in an object. As you see the "fontWeight" is a bit
+            different than the css "font-weight" property. If we have few words
+            keys we need to do that different Because this would be treated as
+            an expression. We need to write it in camelCase.
+          </li>
+          <li>
+            Becaues it is normal JS object, we can make it as a variable.
+            <pre>
+            <code>const h1Styles = {
+              color:"red", 
+              fontWeight:200}</code> </pre>
+            and use it in <code>&lt;h1&gt;</code>
+            tag like this:
+            <code>&lt;h1 style={h1Styles}&gt;Hello&lt;/h1&gt;</code>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>

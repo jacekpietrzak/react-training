@@ -1,0 +1,36 @@
+/* Because this is module we dont need to be worried about class naming. It won't produce any class name clashes  */
+/* In css modules, class can be built based on the other class, thanks to composes*/
+
+.warning {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #999;
+}
+
+.info {
+  composes: warning;
+  color: #fff;
+  background-color: rgb(0, 166, 255);
+}
+
+.danger {
+  composes: warning;
+  color: #fff;
+  background-color: rgb(233, 93, 72);
+}
+
+.success {
+  composes: warning;
+  color: #fff;
+  background-color: rgb(73, 176, 50);
+}
+
+.shadow {
+  box-shadow: 0px 0px 15px #888;
+}

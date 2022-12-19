@@ -1,0 +1,26 @@
+.warning {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #999;
+}
+
+.warning.info {
+  color: #fff;
+  background-color: blue;
+}
+
+.warning.danger {
+  color: #fff;
+  background-color: red;
+}
+
+.warning.success {
+  color: #fff;
+  background-color: green;
+}
