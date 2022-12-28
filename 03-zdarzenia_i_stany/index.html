@@ -8,50 +8,300 @@
     <title>03 - React Zdarzenia i stany</title>
   </head>
   <body>
-    <h2>Stylizacja</h2>
+    <h2>
+      Komponenty klasowe - pierwszy oficjalny sposob na budowanie komponentow w
+      React
+    </h2>
     <ul>
       <li>
-        <h3>How to style React components?</h3>
+        Komponenty klasowe to nic innego jak funkcja opakowana w obiekt klasowy
+        ktora pozwala dziedziczyc dzieciom funkcjonalnosc rodzica i tworyc nowe
+        egzemplarze. Klasa to jest cos jak np ogolny projekt domu bez dokladnych
+        infrmacji jak co bedzie na scianie, jakie wykonczenie. Projekt ktory
+        mozna wybudowac w kazdym miejscu. Schemat. Rozne egzemplarze na
+        podstawie tego samego projektu ktory stworzyl architekt. Czyli architekt
+        tworzy projekt/schemat ktory potem za pomoca slowka
+        <strong>new</strong> mozna tworzyc egzemplarze, dostosowywujac go do
+        swoich potrzeb.
+      </li>
+      <li>
+        bardzo fajny sposob na pisanie software w JS. Object oriented
+        programming.
+      </li>
+      <li>
+        W pewnym momencie tworcy react stwierdzili ze mozna pisac komponenty
+        bardziej funkcyjnie ktore zaczely dominowac w srodowiskach JS i
+        wprowadzony zostal nowy koncept ktory sie nazywa
+        <strong>hooks</strong> ktory zamienia komponenty klasowe na
+        hookowe/funkcyjne.
+      </li>
+      <li>
+        Aby stworzyc nowa klase w React musimy zaimportowc specjalnie
+        przygotowany do tego obiekt <code>React.Component</code> przez
+        programistow React. Zaimportujemy go bezposrednio z Reacta. Aby kod byl
+        bardziej czytelny to uproscimy to do <code>{Component}</code>
+        <code>import {Component} from "react"</code> i nastepnie stworzymy nowy
+        komponent bazujacy na <code>{Component}</code>
+      </li>
+      Tworzymy nasz komponent. Rozszerzamy
+      <code>Component</code
+      >. To znaczy ze nasz Counter ma wszystkie wlasciwosci ktore ma Component i
+      ponadto mozemy dopisac jeszcze jakies swoje funkcjonalnosci.
+      <li><code>class Counter extends Component {}</code></li>
+      <li>
+        Dodamy pare podstawowych komponentow ktore komponent klasowy tworza.
         <ul>
           <li>
-            JSX code looks very similar to standard HTML. We coud think that we
-            could use standard inline styling like this:
-            <code>&lt;h1 style="color:red"&gt;Hello&lt;/h1&gt;</code>.
-            Unfortunately if we do that we will receive few warnings in the
-            development tools which means that this is not the right way to do
-            that.
+            Kazda klasa ma/moze miec cos takiego jak konstruktor
+            <code>constructor</code>. Potrzebne to jest do zainicjowania nowej
+            instancji na bazie naszego obiektu. Gdy chcemy nowa instancje to
+            wywolujemy konstruktor.
           </li>
           <li>
-            JSX is not an HTML. There are similarities in both but it wont work
-            like that. Instead we can do that:
-            <code>&lt;h1 style={{color:"red"}}&gt;Hello&lt;/h1&gt;</code>.
-            Because we are writing it in JSX the value for prop which here is
-            "style" needs to be an object. In JSX, if we want to provide
-            something else than a string (number, boolean, variable) we need to
-            give it as an object. Value for css is an JS object
-            <code>{key: "string value"}</code> . That is why we have object in
-            object.
+            jesli chcemy aby nasz komponent mial wszystkie funkcjonalnosci co
+            <code>Component</code> to musimy uzyc w srodku konstruktora metody
+            <code>super()</code>. Ona jest wywolywana bezposrednio w
+            konstruktorze. Ona pozwala zainicjowanc wszystkie funkcjonalnosci
+            ktore ma <code>Component</code> i sa dla nas dostepne.
+            <pre><code>class Counter extends Component {
+                constructor() {
+                  super();
+                }
+              }
+              </code></pre>
           </li>
           <li>
-            If we would like to give a second value we need to use a comma, not
-            a semicolon like this:
+            mamy tez obowiazek uzyc metody ktora nazywa sie
+            <code>render()</code> ktora tez przychodzi do nas jako rozszerzenie
+            z obiektu <code>Component</code>. Ta metoda pozwala nam po jej
+            wywolaniu, wyrenderowac cos. Ostatecznie w nim musimy zwrocic jakis
+            <code>JSX</code>
+            <pre><code>class Counter extends Component {
+                constructor() {
+                  super();
+                }
+
+                render(){
+                  return(
+                    &lt;&gt;
+                    &lt;h1&gt;JSX&lt;/h1&gt;
+                    &lt;/&gt;
+                  )
+                }
+
+              }
+              </code></pre>
+          </li>
+          <li>
+            Tutaj tez mamy dostepne <code>props</code> ale podajemy je w
+            konstruktorze
+            <pre><code>class Counter extends Component {
+                constructor(<strong>props</strong>) {
+                  super();
+                }
+
+                render(){
+                  return(
+                    &lt;&gt;
+                    &lt;h1&gt;JSX&lt;/h1&gt;
+                    &lt;/&gt;
+                  )
+                }
+
+              }
+              </code></pre>
+            od tego momentu mozemy je przeczytac w konstruktorze albo gdzies
+            indziej i powinnismy je tez przekazac do metody
+            <code>super(props)</code> jesli chcemy zeby wszystko dzialalo
+            poprawnie.
+            <pre><code>class Counter extends Component {
+                constructor(<strong>props</strong>) {
+                  super(<strong>props</strong>);
+                }
+
+                render(){
+                  return(
+                    &lt;&gt;
+                    &lt;h1&gt;JSX&lt;/h1&gt;
+                    &lt;/&gt;
+                  )
+                }
+
+              }
+              </code></pre>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Mamy wszystkie podstawowe konfiguracje. Mozemy teraz zaimportowac
+        komponent do glownej aplikacji.
+      </li>
+    </ul>
+
+    <h2>Komponent "Counter"</h2>
+    <ul>
+      <li>
+        Do tak utwozonego komponentu dodamy 2 przyciski ktore beda albo
+        zwiekszac albo zmniejszac liczbe poczatkowa.
+      </li>
+      <li>
+        Jesli chcialbym wywolac jakis kod, funkcje czy cokolwiek, to robie to w
+        konstruktorze.
+      </li>
+      <li>przekazemy pare propsow: <code>initialValue: {0} step={1}</code></li>
+      <li>
+        w klasach mamy dostep do zmiennych ktore sa lokalne i nazywamy je
+        <code>static</code>. 2 podstawowe ktorych najczesciej sie uzywa to:
+        <ul>
+          <li>
+            <code>defaultProps</code>
+            <code>static defaultProps = { step: 1, initialValue: 0, } </code>
+            zmienna ktora da nam pewnosc ze jesli nie dostaniemy jakis wartosci
+            dla zmienych ktore powinny, ktorych sie spodziewam ze przyjda z
+            proposow to <code>defaultProps</code> to aplikacja sie nie wysypie.
+          </li>
+          <li>
+            zaimportujemy sobie PropTypes do zabezpieczenia naszych typow i
+            okreslimy dla kadego znich.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Dodamy sobie jakis event handler do naszych przyciskow. Wczesniej w JS
+        dodawalismy do elementu <code>.addEventListener()</code>. W
+        <strong>React</strong> nie pracujemy z DOMem tylko z VirtualDOM. Dlatego
+        nie uzywamy tych samych, natywnych, javascript-owych eventow i
+        eventListenerow tylko uzywamy czegos co sie nazywa
+        <strong>Syntetyczne eventy</strong>. Jest to kopia eventow natywnych
+        specjalnie napisana dla React. Jak to dziala?:
+        <ul>
+          <li>
+            w przypadku klikniec uzywamy <code>onClick{}</code> i przekazujemy
+            je do obiektu ktore chcemy nasluchiwac.
+            <ul>
+              <li>
+                Poniewaz powiedzielismy sobie ze w <code>{}</code> mamy czysty
+                JS to mozemy sobie tutaj odrazu przekazac funkcje callback ktora
+                chcemy wywolac po kliknieciu.
+              </li>
+              <li>
+                Mozemy tez przekazac
+                <code>onClick{(event) => {console.log(event)}}</code>event
+              </li>
+              <li>
+                jesli chcemy przekazac jakas bardziej rozbudowana funkcje to
+                zwyczajowo staramy sie ja wyrzucic gdzies przed
+                <code>render()</code> i wewnatrz <code>onClick{}</code> do niej
+                sie odnosimy. Jak to zrobic? Jest pare sposobow:
+                <ul>
+                  <li>
+                    Sposob #1. Dobrze jest zdefiniowac ja wedlog noweg sposobu
+                    czyli z uzyciem <strong>arrow function</strong>. Utworzymy 2
+                    metodey. Jedna aby przycisk zmniejszal liczbe a druga aby
+                    przycisk zwiekszal liczbe.
+                    <code
+                      >handleDecrement = (event) => {console.log(event)}</code
+                    >
+
+                    W klasach jesli chcemy sie odniesc do czegos co dotyczy tej
+                    klasy, uzywamy slowka
+                    <code>this</code> np. <code>this.handleDecrement</code>.
+                    Poniewaz chcemy aby funkcja sie uruchomila po kliku to jej
+                    nie wywolujemy tylko przekazujemy handle.
+                    <code>this</code> to odnosnik do naszej klasy. Mozemy
+                    wylogowac i zobaczyc czym jest <code>this</code>
+                  </li>
+                  <li>
+                    Sposob #2. Zrobimy przyladowa metode
+                    <code>sayHello(){}</code>. Metoda jako wlasciwosc klasy.
+                    Tutaj mamy slowko ktore okresla nazwe tej metody otwieramy
+                    () i odazu {}. Tak jakkby definiowana funkcja ale bez slowka
+                    <strong>function</strong> przed nia. Na przyklad
+                    <code>sayHello(){console.log("Say Hello!!")}</code>. Tego
+                    typu definicja sprawia ze nie mamy latwego dostepu do
+                    obiektu <code>this</code>. Musimy zrobic dodatkowa prace aby
+                    ten dostep uzyskac. <code>this</code> jest nam potrzebne np.
+                    kiedy w jednej z metod chcemy odwolac sie do innej metody.
+                    Aby to zrobic potrzebujemy wlasnie dostep do obiektu
+                    <code>this</code> ktory daje nam dostep do wszystkich metod
+                    i zmiennych komponentu w ktorym sie znajdujemy. Co mozemy
+                    zrobic zeby taki dostep miec? Aby bylo dostepne to musimy
+                    okreslic kontekst. Robimy to w
+                    <strong>constructor</strong> wpisujac
+                    <code>this.nazwaMetody = this.nazwaMetody.bind(this)</code>
+                    uzywamy metody <code>bind</code>. Dzieki temu
+                    <code>this</code> ktore jest wewnatrz konstruktora jest
+                    przyporzadkowane do metody.
+                  </li>
+                  <li>
+                    Lepiej uzywac <strong>arrow function</strong> gdyz jest to
+                    prostsze, bardziej intuicyjne i bardziej czytelne.
+                    <strong>Arrow function</strong> pozwala na bezposredni
+                    dostep do <code>this</code> i one nie maja swojego
+                    <code>this</code> i biora odrazu <code>this</code> ktore
+                    bierze z kontekstu a kontekstem tutaj dla nas jest nasza
+                    klasa.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>State</h3>
+        <ul>
+          <li>
+            <strong>State</strong> - dzieki niemu komponenty w
+            <strong>React</strong> sa reaktywne i potrafia sie dostosowywac,
+            reagowac i dostosowywac do stanu aplikacji. Dzieki niemu komponent
+            reaguje na zmiany ktore wprowadzja uzytkownicy poprzez iterakcje z
+            interfejsem. Stan aplikacji okreslamy w konstruktorze klasy.
+            <code>
+              constructor(props) { super(rops); <strong>this.state={}</strong>;
+              }
+            </code>
+          </li>
+          <li>
+            Stan jest obiektem w ktorym mozemy sobie zdefiniowac jakies klucze i
+            przypisac im jakies wartosci.
+          </li>
+          <li>
+            W nasyzm przykladzie chcemy sobie zdefiniowac wartosc dla tego co
+            bedzie naszym counterem aby wartosc byla dynamiczna.
+          </li>
+          <li>
+            Kluczem moze byc dowolny tekst a wartoscia po <code>:</code> bedzie
+            tzw wartocia inicjalna dla naszego komponentu. Aby uzyc tej
+            dynamicznej wartosci musimy podac go w nawiasie klamrowym, musimy
+            odniesc sie do tego komponentu poprzez this, do czego sie odwolujemy
+            czyli state i do czego konkretnie czyli w tym przyapdku
+            counterValue. <code>{this.state.counterValue}</code>. Aby komponent
+            byl bardziej dynamiczny mozemy przekazac do initial value, wartosc
+            naszego propsa. W tym przypadku <code>props.initialValue</code>
+          </li>
+          <li>
+            Jak teraz zmienic wartosc naszego stanu? Logiczne by bylo uzycie np
+            mutacji i nadanie nowej wartosci zmiennej np.
+            <code>this.state.counterValue =+ 1</code>. Poniewaz w React rzeczy
+            dzieja sie asynchronicznie to niemutowalnosc stanu jest jednym z
+            podstawowych zasad. Aby zmienic stan uzywamy metody
+            <code>setState()</code>. Jak?
+            <code>this.setState()</code> Potrzebujemy zmienic wartosc stanu
+            ktora jest w naszej klasie dlatego <code>this</code>.
+            <code>setState()</code> jako argument bierze funkcje w ktorej
+            zwrocimy nowy stan. <code>this.setState( () => {} )</code>. To
+            znaczy ze przekazujemy funkcje ktora zwroci nam obiekt ktory bedzie
+            nowym stanem. Nowa wartosc calego stanu.
             <code
-              >&lt;h1 style={{color:"red", fontWeight:200
-              }}&gt;Hello&lt;/h1&gt;</code
-            >. Because we are in an object. As you see the "fontWeight" is a bit
-            different than the css "font-weight" property. If we have few words
-            keys we need to do that different Because this would be treated as
-            an expression. We need to write it in camelCase.
+              >this.setState( () => { return(counterValue: newState) } )</code
+            >.
           </li>
           <li>
-            Becaues it is normal JS object, we can make it as a variable.
-            <pre>
-            <code>const h1Styles = {
-              color:"red", 
-              fontWeight:200}</code> </pre>
-            and use it in <code>&lt;h1&gt;</code>
-            tag like this:
-            <code>&lt;h1 style={h1Styles}&gt;Hello&lt;/h1&gt;</code>
+            <code>setState()</code> jest o tyle fajna metoda ze zawsze ma w
+            sobie wartosc stanu ktory byl do tej pory
+            <code>prevState</code> ktory mozemy uzyc jako argument naszej
+            funkcji callback.
           </li>
         </ul>
       </li>
