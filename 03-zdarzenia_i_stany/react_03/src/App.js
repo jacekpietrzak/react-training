@@ -6,6 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">Class component</header>
       <Counter initialValue={0} step={1} />
+      <Counter initialValue={0} step={1} />
     </div>
   );
 }
