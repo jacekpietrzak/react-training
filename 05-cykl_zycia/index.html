@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>05 - React: Cykl życia</title>
+  </head>
+  <body>
+    <h2>Cykl życia, React</h2>
+    <ul>
+      <li>Utworzymy nowy komponent MyForm.jsx</li>
+      <li>
+        Komponent bedzie mial swoj wewnetrzny stan wiec chcemy zaimportowac
+        <code>{Component}</code> z Reacta.
+        <code>import {Component} from "react"</code>. To bedziemy rozszerzec gdy
+        bedziemy tworzyc nasza klase.
+      </li>
+      <li>
+        Stworzylismy prosty formularz z przyciskiem submit. Po nacisnieciu
+        jednak nam sie przeladowuje strona a my tego nie chcemy bo tworzmy
+        single page apps. Chcemy tylko poruszac sie wewnatrz js. Jak to zrobic?
+        Jesli do funkcji wysylania przekazemy event jako argument to JS ma
+        mozliwosc wywolania <code>event.precentDefault()</code>. Dzieki temu nie
+        przeladowuje nam sie strona a funkcja callbac sie uruchamia.
+      </li>
+    </ul>
+  </body>
+</html>

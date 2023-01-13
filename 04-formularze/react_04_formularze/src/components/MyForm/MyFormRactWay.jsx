@@ -60,9 +60,9 @@ class MyFormReactWay extends Component {
     this.setState(
       {
         [name]: type !== "checkbox" ? value : checked,
+        // Poniewaz checkbox nie posiada "value" tylko "checked" to musimy wprowadzic warunek w naszej funkcji. Uzyjemy ternary oeprator. Sprawdzimy typ inputu i jesli jest to checkbox to wartosc przyjmie to co przyjdzie z checked.
       },
       // Operacja setState jest operacja asynchroniczna. Jesli chcemy uzyc aktualnych danych z state to w tym miejscu po przecinku uzywamy funkcji callback. Jesli zrobilibysmy ta funkcje pozniej to dostaniemy ostatni state a nie aktualny state. Po to jest ten callback.
-      // Poniewaz checkbox nie posiada "value" tylko "checked" to musimy wprowadzic warunek w naszej funkcji. Uzyjemy ternary oeprator. Sprawdzimy typ inputu i jesli jest to checkbox to wartosc przyjmie to co przyjdzie z checked.
       () => {
         // console.log("Updated state: ", this.state);
       }
