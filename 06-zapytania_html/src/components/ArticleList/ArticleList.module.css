@@ -1,0 +1,28 @@
+.list {
+  text-align: left;
+}
+
+.list a {
+  color: #111;
+  text-decoration: none;
+  transition: color ease 150ms;
+}
+
+.list a:hover {
+  color: red;
+}
+
+.list li {
+  padding-bottom: 5px;
+}
+
+.list li::marker {
+  color: #111;
+}
+.topic {
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+.pageNumber {
+  padding: 0 15px;
+}
